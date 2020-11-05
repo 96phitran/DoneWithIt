@@ -9,12 +9,12 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import defaultStyles from "../config/styles";
 import AppText from "./AppText";
 import Screen from "./Screen";
+import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 
-function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem }) {
+function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -29,9 +29,16 @@ function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem }) {
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <AppText style={[defaultStyles.text, styles.text]}>
+              {selectedItem.label}
+            </AppText>
+          ) : (
+            <AppText style={[defaultStyles.text, styles.placeholder]}>
+              {placeholder}
+            </AppText>
+          )}
+
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -50,7 +57,7 @@ function AppPicker({ icon, items, onSelectedItem, placeholder, selectedItem }) {
                 label={item.label}
                 onPress={() => {
                   setModalVisible(false);
-                  onSelectedItem(item.label);
+                  onSelectItem(item);
                 }}
               />
             )}
@@ -72,6 +79,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    color: defaultStyles.colors.medium,
+    flex: 1,
   },
   text: {
     flex: 1,
