@@ -9,21 +9,21 @@ import Screen from "../components/Screen";
 const initialMessages = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
+    title: "Moshi Moshi",
+    description: "Let's code!",
     image: require("../assets/mosh.jpg"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2 ",
-    image: require("../assets/mosh.jpg"),
+    title: "Mario Luigi",
+    description: "It's a me! Mariooooo!",
+    image: require("../assets/mario.png"),
   },
 ];
 
 function MessagesScreen(props) {
   const [messages, setMessages] = useState(initialMessages);
-  const [refreshing, setRefreshing] = useState(false)
+  const [refreshing, setRefreshing] = useState(false);
   const handleDelete = (message) => {
     // Delete the message from the messages
     setMessages(messages.filter((m) => m.id !== message.id));
@@ -48,7 +48,7 @@ function MessagesScreen(props) {
         ItemSeparatorComponent={ListItemSeparator}
         refreshing={refreshing}
         onRefresh={() => {
-            setMessages(initialMessages)
+          setMessages(initialMessages);
         }}
       />
     </Screen>
