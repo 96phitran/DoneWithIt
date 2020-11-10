@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
-import {
-  AppForm as Form,
-  AppFormField as FormField,
-  AppFormPicker as Picker,
-  SubmitButton,
-} from "../components/forms";
+import { Form, FormField, FormPicker, SubmitButton } from "../components/forms";
 import Screen from "../components/Screen";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import FormImagePicker from "../components/forms/FormImagePicker";
@@ -103,7 +98,7 @@ function ListingEditScreen() {
           placeholder="Price"
           width={120}
         />
-        <Picker
+        <FormPicker
           items={categories}
           name="category"
           numberOfColumns={3}
