@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import Card from "../components/Card";
@@ -10,6 +10,15 @@ import Screen from "../components/Screen";
 function ListingScreen({ navigation }) {
   const [listings, setlistings] = useState([]);
 
+  useEffect(() => {
+    loadListings();
+  }, []);
+
+  const loadListings = async () => {
+    const response = await listingsApi.getListings();
+    setlistings(response.data);
+  };
+
   return (
     <Screen style={styles.screen}>
       <FlatList
@@ -19,7 +28,7 @@ function ListingScreen({ navigation }) {
           <Card
             title={item.title}
             subTitle={"$" + item.price}
-            image={item.image}
+            imageUrl={item.images[0].url}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
