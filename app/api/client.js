@@ -1,9 +1,16 @@
 import { create } from "apisauce";
 
+import authStorage from "../auth/storage";
 import cache from "../ultility/cache";
 
 const apiClient = create({
   baseURL: "http://127.0.0.1:19002/api",
+});
+
+apiClient.addAsyncRequestTransform(async (request) => {
+  const authToken = await authStorage.getToken();
+  if (!authToken) return;
+  request.headers["x-auth-token"] = authToken;
 });
 
 const get = apiClient.get;
